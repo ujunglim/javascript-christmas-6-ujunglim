@@ -1,9 +1,10 @@
+import InputView from "./InputView.js";
 import OutputView from "./OutputView.js";
 
 class Controller {
   constructor() {
     OutputView.printGreeting();
-    OutputView.printAskMenuAndCount();
+    InputView.readDate();
   }
 }
 export default Controller;
