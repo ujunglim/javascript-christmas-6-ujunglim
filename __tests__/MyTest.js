@@ -56,19 +56,25 @@ describe("날짜입력 예외 테스트", () => {
 describe("메뉴입력 예외 테스트", () => {
   test("메뉴이름과 갯수를-로 구분하지 않았을 때", () => {
     expect(() => {
-      new Order("해물파스타3");
+      new Order("해산물파스타3");
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 
   test("메뉴 갯수를 1미만 입력 시", () => {
     expect(() => {
-      new Order("해물파스타-0");
+      new Order("해산물파스타-0");
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 
   test("메뉴판에 없는 메뉴 입력시 ", () => {
     expect(() => {
       new Order("김치찌개-2");
+    }).toThrow(ErrorMsg.INVALID_ORDER);
+  });
+
+  test("중복된 메뉴 입력시", () => {
+    expect(() => {
+      new Order("해산물파스타-2,해산물파스타-1");
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 });
