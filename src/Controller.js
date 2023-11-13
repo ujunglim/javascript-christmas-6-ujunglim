@@ -39,8 +39,7 @@ class Controller {
 
   printOrder(date, orders) {
     OutputView.printEventPreviewTitle(date);
-    OutputView.printOrderTitle();
-    orders.forEach((order) => OutputView.printOrder(order));
+    OutputView.printOrder(orders);
   }
 }
 export default Controller;

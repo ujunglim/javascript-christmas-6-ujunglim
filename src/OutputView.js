@@ -11,11 +11,11 @@ const OutputView = {
   printEventPreviewTitle(date) {
     Console.print(InfoMsg.EVENT_PREVIEW_TITLE(date));
   },
-  printOrderTitle() {
+  printOrder(orders) {
     Console.print(InfoMsg.ORDER_TITLE);
-  },
-  printOrder(order) {
-    Console.print(InfoMsg.ORDER(order.name, order.count));
+    orders.forEach((order) =>
+      Console.print(InfoMsg.ORDER(order.name, order.count))
+    );
   },
 };
 
