@@ -63,6 +63,12 @@ describe("메뉴입력 예외 테스트", () => {
   test("메뉴 갯수를 1미만 입력 시", () => {
     expect(() => {
       new Order("해물파스타-0");
-    });
+    }).toThrow(ErrorMsg.INVALID_ORDER);
+  });
+
+  test("메뉴판에 없는 메뉴 입력시 ", () => {
+    expect(() => {
+      new Order("김치찌개-2");
+    }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 });

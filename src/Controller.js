@@ -28,8 +28,8 @@ class Controller {
     while (true) {
       try {
         const input = await InputView.readOrder();
-        new Order(input);
-        break;
+        const order = new Order(input);
+        return order.getOrder();
       } catch (error) {
         OutputView.print(error.message);
       }
