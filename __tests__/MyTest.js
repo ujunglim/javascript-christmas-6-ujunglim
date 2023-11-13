@@ -3,6 +3,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { EOL as LINE_SEPARATOR } from "os";
 import Order from "../src/model/Order.js";
 import ErrorMsg from "../src/util/ErrorMsg.js";
+import formatNumberWithComma from "../src/util/formatNumberWithComma.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -91,6 +92,34 @@ describe("기능 테스트", () => {
 
     // then
     const expected = ["<주문 메뉴>", "티본스테이크 1개", "초코케이크 2개"];
+
+    expectLogContains(getOutput(logSpy), expected);
+  });
+
+  test.each([
+    [1000, "1,000"],
+    [2000000, "2,000,000"],
+  ])("숫자를 1000단위씩 끊는 메서드 테스트", (input, answer) => {
+    expect(formatNumberWithComma(input)).toBe(answer);
+  });
+
+  test("주문 메뉴 출력", async () => {
+    // given
+    const logSpy = getLogSpy();
+    mockQuestions(["3", "초코케이크-1,해산물파스타-3"]);
+
+    // when
+    const app = new App();
+    await app.run();
+
+    // then
+    const expected = [
+      "<주문 메뉴>",
+      "초코케이크 1개",
+      "해산물파스타 3개",
+      "<할인 전 총주문 금액>",
+      "120,000원",
+    ];
 
     expectLogContains(getOutput(logSpy), expected);
   });

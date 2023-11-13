@@ -1,6 +1,7 @@
 import OutputView from "../OutputView.js";
 import Constants from "../util/Constants.js";
 import ErrorMsg from "../util/ErrorMsg.js";
+import formatNumberWithComma from "../util/formatNumberWithComma.js";
 
 class Order {
   #orders;
@@ -64,7 +65,8 @@ class Order {
       sum += Constants.MENU[name] * count;
     });
     // 1000단위 나누기
-    OutputView.printBeforeDiscount(sum);
+    const formattedStr = formatNumberWithComma(sum);
+    OutputView.printBeforeDiscount(formattedStr);
   }
 }
 
