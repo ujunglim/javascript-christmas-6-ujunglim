@@ -8,14 +8,15 @@ const OutputView = {
   printGreeting() {
     Console.print(InfoMsg.GREETING);
   },
-  printMenuTitle(date) {
-    Console.print(InfoMsg.MENU_TITLE(date));
+  printEventPreviewTitle(date) {
+    Console.print(InfoMsg.EVENT_PREVIEW_TITLE(date));
   },
-  printMenu() {
-    Console.print("<주문 메뉴>");
-    // ...
+  printOrderTitle() {
+    Console.print(InfoMsg.ORDER_TITLE);
   },
-  // ...
+  printOrder(order) {
+    Console.print(InfoMsg.ORDER(order.name, order.count));
+  },
 };
 
 export default OutputView;

@@ -9,8 +9,8 @@ class Controller {
   async start() {
     OutputView.printGreeting();
     const date = await this.getValidDate();
-    const order = await this.getValidOrder();
-    OutputView.printMenuTitle(date);
+    const orders = await this.getValidOrder();
+    this.printOrder(date, orders);
   }
 
   async getValidDate() {
@@ -35,6 +35,12 @@ class Controller {
         OutputView.print(error.message);
       }
     }
+  }
+
+  printOrder(date, orders) {
+    OutputView.printEventPreviewTitle(date);
+    OutputView.printOrderTitle();
+    orders.forEach((order) => OutputView.printOrder(order));
   }
 }
 export default Controller;

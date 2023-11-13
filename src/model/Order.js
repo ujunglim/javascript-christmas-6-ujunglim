@@ -49,6 +49,7 @@ class Order {
     if (orderArr.length !== new Set(menus).size) {
       throw new Error(ErrorMsg.INVALID_ORDER);
     }
+    this.#orders = orderArr;
   }
 
   getOrder() {

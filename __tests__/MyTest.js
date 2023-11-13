@@ -78,3 +78,20 @@ describe("메뉴입력 예외 테스트", () => {
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 });
+
+describe("기능 테스트", () => {
+  test("주문 메뉴 출력", async () => {
+    // given
+    const logSpy = getLogSpy();
+    mockQuestions(["3", "티본스테이크-1,초코케이크-2"]);
+
+    // when
+    const app = new App();
+    await app.run();
+
+    // then
+    const expected = ["<주문 메뉴>", "티본스테이크 1개", "초코케이크 2개"];
+
+    expectLogContains(getOutput(logSpy), expected);
+  });
+});
