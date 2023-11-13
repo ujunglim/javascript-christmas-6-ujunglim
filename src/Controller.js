@@ -8,6 +8,7 @@ class Controller {
   async start() {
     OutputView.printGreeting();
     const date = await this.getValidDate();
+    const order = await this.getValidOrder();
   }
 
   async getValidDate() {
@@ -20,6 +21,10 @@ class Controller {
         OutputView.print(error.message);
       }
     }
+  }
+
+  async getValidOrder() {
+    const input = await InputView.readOrder();
   }
 }
 export default Controller;
