@@ -8,6 +8,9 @@ const OutputView = {
   printGreeting() {
     Console.print(InfoMsg.GREETING);
   },
+  printMenuTitle(date) {
+    Console.print(InfoMsg.MENU_TITLE(date));
+  },
   printMenu() {
     Console.print("<주문 메뉴>");
     // ...

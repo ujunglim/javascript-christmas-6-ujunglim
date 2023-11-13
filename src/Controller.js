@@ -10,6 +10,7 @@ class Controller {
     OutputView.printGreeting();
     const date = await this.getValidDate();
     const order = await this.getValidOrder();
+    OutputView.printMenuTitle(date);
   }
 
   async getValidDate() {
