@@ -1,5 +1,6 @@
 import InputView from "./InputView.js";
 import OutputView from "./OutputView.js";
+import Order from "./model/Order.js";
 import DateValidator from "./util/DateValidator.js";
 
 class Controller {
@@ -24,7 +25,15 @@ class Controller {
   }
 
   async getValidOrder() {
-    const input = await InputView.readOrder();
+    while (true) {
+      try {
+        const input = await InputView.readOrder();
+        new Order(input);
+        break;
+      } catch (error) {
+        OutputView.print(error.message);
+      }
+    }
   }
 }
 export default Controller;
