@@ -17,6 +17,9 @@ const OutputView = {
       Console.print(InfoMsg.ORDER(order.name, order.count))
     );
   },
+  printBeforeDiscount(sum) {
+    Console.print(InfoMsg.BEFORE_DISCOUNT(sum));
+  },
 };
 
 export default OutputView;

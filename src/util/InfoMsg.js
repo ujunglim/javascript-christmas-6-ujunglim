@@ -10,6 +10,7 @@ const InfoMsg = {
     `,
   ORDER_TITLE: "<주문 메뉴>",
   ORDER: (menu, count) => `${menu} ${count}개`,
+  BEFORE_DISCOUNT: (sum) => `\n<할인 전 총주문 금액>\n ${sum}원`,
 };
 
 export default InfoMsg;

@@ -1,3 +1,4 @@
+import OutputView from "../OutputView.js";
 import Constants from "../util/Constants.js";
 import ErrorMsg from "../util/ErrorMsg.js";
 
@@ -54,6 +55,16 @@ class Order {
 
   getOrder() {
     return this.#orders;
+  }
+
+  calcBeforeDiscount() {
+    let sum = 0;
+    this.#orders.forEach((order) => {
+      const { name, count } = order;
+      sum += Constants.MENU[name] * count;
+    });
+    // 1000단위 나누기
+    OutputView.printBeforeDiscount(sum);
   }
 }
 

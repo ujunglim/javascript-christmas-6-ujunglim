@@ -4,6 +4,7 @@ import Order from "./model/Order.js";
 import DateValidator from "./util/DateValidator.js";
 
 class Controller {
+  #order;
   constructor() {}
 
   async start() {
@@ -11,6 +12,7 @@ class Controller {
     const date = await this.getValidDate();
     const orders = await this.getValidOrder();
     this.printOrder(date, orders);
+    this.#order.calcBeforeDiscount();
   }
 
   async getValidDate() {
@@ -29,8 +31,8 @@ class Controller {
     while (true) {
       try {
         const input = await InputView.readOrder();
-        const order = new Order(input);
-        return order.getOrder();
+        this.#order = new Order(input);
+        return this.#order.getOrder();
       } catch (error) {
         OutputView.print(error.message);
       }
