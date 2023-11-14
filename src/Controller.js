@@ -64,6 +64,7 @@ class Controller {
     this.checkWeekdaysDessertEvent(date);
     this.checkWeekendMainEvent(date);
     this.checkSpecialEvent(date);
+    this.checkPromotionEvent();
     console.log("=========", this.#events);
   }
 
@@ -106,6 +107,14 @@ class Controller {
   checkSpecialEvent(date) {
     if (checkEventDay.isSpecialDay(date)) {
       this.#events[Constants.EVENT_TYPE.SPECIAL] = 1000;
+    }
+  }
+
+  checkPromotionEvent() {
+    if (
+      this.#order.getBillBeforeDiscount() >= Constants.STANDARD_TO_GET_PROMOTION
+    ) {
+      this.#events[Constants.EVENT_TYPE.PROMOTION] = 2500;
     }
   }
 }
