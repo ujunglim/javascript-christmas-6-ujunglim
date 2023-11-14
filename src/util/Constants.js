@@ -4,6 +4,16 @@ const Constants = {
   REGEX_KOREAN: /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+\-[1-9]\d*/,
   CHRISTMAS: "CHRISTMAS",
   CHRISTMAS_EVENT_LAST_DATE: 25,
+  DISCOUNT_PER_MENU: 2023,
+  EVENT_TYPE: {
+    WEEKDAY: "WEEKDAY",
+  },
+  MENU_TYPE: {
+    APPETIZER: "APPETIZER",
+    MAIN: "MAIN",
+    DESSERT: "DESSERT",
+    DRINK: "DRINK",
+  },
   MENU: {
     양송이수프: { cost: 6000, type: "APPETIZER" },
     타파스: { cost: 5500, type: "APPETIZER" },

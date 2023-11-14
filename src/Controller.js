@@ -73,10 +73,16 @@ class Controller {
     OutputView.printChristmasEvent(discountStr);
   }
   checkWeekdaysDessertEvent(date) {
-    // 디저트가 있나
-
-    // 평일인가
-    checkDay.isWeekday(date);
+    const dessertCount = this.#order.getDessertCount();
+    // 디저트가 없을때
+    if (dessertCount === 0) {
+      return;
+    }
+    // 평일일때
+    if (checkDay.isWeekday(date)) {
+      this.#events[Constants.EVENT_TYPE.WEEKDAY] =
+        dessertCount * Constants.DISCOUNT_PER_MENU;
+    }
   }
 }
 export default Controller;

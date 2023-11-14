@@ -198,3 +198,12 @@ describe("기능 테스트", () => {
     expectLogContains(getOutput(logSpy), expected);
   });
 });
+
+// describe("평일 할인", () => {
+//   test("평일에 디저트를 주문할 때 할인가격", () => {
+//     expect(() => {
+//       const order = new Order("초코케이크-1");
+//       order.checkWeekdaysDessertEvent(3)
+//     }).toBe(2023);
+//   });
+// });

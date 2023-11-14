@@ -69,6 +69,12 @@ class Order {
   getBillBeforeDiscount() {
     return this.#billBeforeDiscount;
   }
+
+  getDessertCount() {
+    return Array.from(this.#orderMap.values()).filter(
+      (order) => order.type === Constants.MENU_TYPE.DESSERT
+    ).length;
+  }
 }
 
 export default Order;
