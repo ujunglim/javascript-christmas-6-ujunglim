@@ -7,6 +7,7 @@ const Constants = {
   DISCOUNT_PER_MENU: 2023,
   EVENT_TYPE: {
     WEEKDAY: "WEEKDAY",
+    WEEKEND: "WEEKEND",
   },
   MENU_TYPE: {
     APPETIZER: "APPETIZER",

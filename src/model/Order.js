@@ -70,10 +70,14 @@ class Order {
     return this.#billBeforeDiscount;
   }
 
-  getDessertCount() {
-    return Array.from(this.#orderMap.values()).filter(
-      (order) => order.type === Constants.MENU_TYPE.DESSERT
-    ).length;
+  getCountOfTargetType(targetType) {
+    let count = 0;
+    Array.from(this.#orderMap.values())
+      .filter((order) => order.type === targetType)
+      .forEach((menu) => {
+        count += menu.count;
+      });
+    return count;
   }
 }
 

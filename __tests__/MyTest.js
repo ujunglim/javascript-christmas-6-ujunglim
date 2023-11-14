@@ -201,9 +201,25 @@ describe("기능 테스트", () => {
 
 // describe("평일 할인", () => {
 //   test("평일에 디저트를 주문할 때 할인가격", () => {
+//     const ctrl = new Controller();
+//     ctrl.start();
+//     const a = ctrl.checkWeekdaysDessertEvent(3);
+//     expect(a).toBe(2023);
+//   });
+// });
+
+// test.each([
+//   [1000, "1,000"],
+//   [2000000, "2,000,000"],
+// ])("숫자를 1000단위씩 끊는 메서드 테스트", (input, answer) => {
+//   expect(formatNumberWithComma(input)).toBe(answer);
+// });
+
+// describe("주말 할인", () => {
+//   test("평일에 디저트를 주문할 때 할인가격", () => {
 //     expect(() => {
-//       const order = new Order("초코케이크-1");
+//       const order = new Order("해산물파스타-2");
 //       order.checkWeekdaysDessertEvent(3)
-//     }).toBe(2023);
+//     }).toBe({});
 //   });
 // });

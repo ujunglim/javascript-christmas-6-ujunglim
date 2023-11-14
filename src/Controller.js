@@ -62,6 +62,8 @@ class Controller {
     }
     this.checkChristamsEvent(date);
     this.checkWeekdaysDessertEvent(date);
+    this.checkWeekendMainEvent(date);
+    console.log("=========", this.#events);
   }
 
   checkChristamsEvent(date) {
@@ -73,7 +75,9 @@ class Controller {
     OutputView.printChristmasEvent(discountStr);
   }
   checkWeekdaysDessertEvent(date) {
-    const dessertCount = this.#order.getDessertCount();
+    const dessertCount = this.#order.getCountOfTargetType(
+      Constants.MENU_TYPE.DESSERT
+    );
     // 디저트가 없을때
     if (dessertCount === 0) {
       return;
@@ -82,6 +86,19 @@ class Controller {
     if (checkDay.isWeekday(date)) {
       this.#events[Constants.EVENT_TYPE.WEEKDAY] =
         dessertCount * Constants.DISCOUNT_PER_MENU;
+    }
+  }
+
+  checkWeekendMainEvent(date) {
+    const mainCount = this.#order.getCountOfTargetType(
+      Constants.MENU_TYPE.MAIN
+    );
+    if (mainCount === 0) {
+      return;
+    }
+    if (checkDay.isWeekend(date)) {
+      this.#events[Constants.EVENT_TYPE.WEEKEND] =
+        mainCount * Constants.DISCOUNT_PER_MENU;
     }
   }
 }
