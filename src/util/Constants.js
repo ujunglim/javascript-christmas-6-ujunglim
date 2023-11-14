@@ -8,6 +8,7 @@ const Constants = {
   EVENT_TYPE: {
     WEEKDAY: "WEEKDAY",
     WEEKEND: "WEEKEND",
+    SPECIAL: "SPECIAL",
   },
   MENU_TYPE: {
     APPETIZER: "APPETIZER",

@@ -12,6 +12,10 @@ const checkEventDay = {
     const dayOfWeek = this.getDayOfWeek(date);
     return 5 <= dayOfWeek && dayOfWeek <= 6;
   },
+  isSpecialDay(date) {
+    const specials = new Set([3, 10, 17, 24, 25, 31]);
+    return specials.has(date);
+  },
 };
 
 export default checkEventDay;

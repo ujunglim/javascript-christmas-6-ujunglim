@@ -63,6 +63,7 @@ class Controller {
     this.checkChristamsEvent(date);
     this.checkWeekdaysDessertEvent(date);
     this.checkWeekendMainEvent(date);
+    this.checkSpecialEvent(date);
     console.log("=========", this.#events);
   }
 
@@ -99,6 +100,12 @@ class Controller {
     if (checkEventDay.isWeekend(date)) {
       this.#events[Constants.EVENT_TYPE.WEEKEND] =
         mainCount * Constants.DISCOUNT_PER_MENU;
+    }
+  }
+
+  checkSpecialEvent(date) {
+    if (checkEventDay.isSpecialDay(date)) {
+      this.#events[Constants.EVENT_TYPE.SPECIAL] = 1000;
     }
   }
 }
