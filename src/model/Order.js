@@ -15,6 +15,7 @@ class Order {
   #validate(input) {
     this.#checkOrderFormat(input);
     this.#checkExistaneAndRedundancy(input);
+    this.#orderedOnlyDrink(input);
   }
 
   #checkOrderFormat(inputs) {
@@ -42,6 +43,15 @@ class Order {
       cost: Constants.MENU[name]?.cost,
       type: Constants.MENU[name]?.type,
     });
+  }
+
+  #orderedOnlyDrink() {
+    for (const [name, detail] of this.#orderMap) {
+      if (detail.type !== Constants.MENU_TYPE.DRINK) {
+        return;
+      }
+    }
+    throw new Error(ErrorMsg.ORDERED_ONLY_DRINK);
   }
 
   getOrder() {

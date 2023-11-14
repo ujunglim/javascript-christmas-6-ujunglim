@@ -78,6 +78,12 @@ describe("메뉴입력 예외 테스트", () => {
       new Order("해산물파스타-2,해산물파스타-1");
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
+
+  test("음료수만 주문할 수 없다", () => {
+    expect(() => {
+      new Order("제로콜라-1,레드와인-1");
+    }).toThrow(ErrorMsg.ORDERED_ONLY_DRINK);
+  });
 });
 
 describe("기능 테스트", () => {
@@ -152,7 +158,7 @@ describe("기능 테스트", () => {
   test("총주문 금액 만원 미만시 혜택이 없다", async () => {
     // given
     const logSpy = getLogSpy();
-    mockQuestions(["3", "제로콜라-1"]);
+    mockQuestions(["3", "타파스-1"]);
 
     // when
     const app = new App();
@@ -161,9 +167,9 @@ describe("기능 테스트", () => {
     // then
     const expected = [
       "<주문 메뉴>",
-      "제로콜라 1개",
+      "타파스 1개",
       "<할인 전 총주문 금액>",
-      "3,000원",
+      "5,500원",
       "<증정 메뉴>",
       "없음",
       "<혜택 내역>",
