@@ -4,6 +4,7 @@ import Order from "./model/Order.js";
 import Constants from "./util/Constants.js";
 import DateValidator from "./util/DateValidator.js";
 import InfoMsg from "./util/InfoMsg.js";
+import checkDay from "./util/checkDay.js";
 import formatNumberWithComma from "./util/formatNumberWithComma.js";
 import { Console } from "@woowacourse/mission-utils";
 class Controller {
@@ -28,7 +29,7 @@ class Controller {
       try {
         const input = await InputView.readDate();
         DateValidator(input);
-        return input;
+        return Number(input);
       } catch (error) {
         OutputView.print(error.message);
       }
@@ -60,6 +61,7 @@ class Controller {
       return;
     }
     this.checkChristamsEvent(date);
+    this.checkWeekdaysDessertEvent(date);
   }
 
   checkChristamsEvent(date) {
@@ -69,6 +71,12 @@ class Controller {
     // this.#events[Constants.CHRISTMAS] = 1000 + (date - 1) * 100;
     const discountStr = formatNumberWithComma(1000 + (date - 1) * 100);
     OutputView.printChristmasEvent(discountStr);
+  }
+  checkWeekdaysDessertEvent(date) {
+    // 디저트가 있나
+
+    // 평일인가
+    checkDay.isWeekday(date);
   }
 }
 export default Controller;
