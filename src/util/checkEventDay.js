@@ -1,4 +1,4 @@
-const checkDay = {
+const checkEventDay = {
   getDayOfWeek(date) {
     const targetDate = new Date(`2023-12-${date}`);
     const dayOfWeek = targetDate.getDay(); // 0은 일요일, 1은 월요일, ..., 6은 토요일
@@ -14,4 +14,4 @@ const checkDay = {
   },
 };
 
-export default checkDay;
+export default checkEventDay;
