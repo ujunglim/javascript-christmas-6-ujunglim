@@ -28,6 +28,7 @@ class Controller {
     this.showEvents();
     this.showTotalDiscount();
     this.showAfterDiscountBill();
+    this.checkBadge();
   }
 
   async getValidDate() {
@@ -142,6 +143,20 @@ class Controller {
       this.#order.getBillBeforeDiscount() - this.#totalDiscount
     );
     OutputView.printAfterDiscountBill(afterDiscount);
+  }
+
+  checkBadge() {
+    let badge;
+    if (this.#totalDiscount === 0) {
+      badge = null;
+    } else if (this.#totalDiscount >= 20000) {
+      badge = "산타";
+    } else if (this.#totalDiscount >= 10000) {
+      badge = "트리";
+    } else if (this.#totalDiscount >= 5000) {
+      badge = "별";
+    }
+    Console.print(InfoMsg.BADGE(badge));
   }
 }
 export default Controller;

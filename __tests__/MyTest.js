@@ -229,7 +229,8 @@ describe("기능 테스트", () => {
       "-9,446원",
       "<할인 후 예상 결제 금액>",
       "223,554원",
-      // "<12월 이벤트 배지>",
+      "<12월 이벤트 배지>",
+      "별",
     ];
 
     expectLogContains(getOutput(logSpy), expected);
