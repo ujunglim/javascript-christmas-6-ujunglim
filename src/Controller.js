@@ -4,7 +4,7 @@ import Order from "./model/Order.js";
 import Constants from "./util/Constants.js";
 import DateValidator from "./util/DateValidator.js";
 import InfoMsg from "./util/InfoMsg.js";
-import checkDay from "./util/checkDay.js";
+import checkEventDay from "./util/checkEventDay.js";
 import formatNumberWithComma from "./util/formatNumberWithComma.js";
 import { Console } from "@woowacourse/mission-utils";
 class Controller {
@@ -83,7 +83,7 @@ class Controller {
       return;
     }
     // 평일일때
-    if (checkDay.isWeekday(date)) {
+    if (checkEventDay.isWeekday(date)) {
       this.#events[Constants.EVENT_TYPE.WEEKDAY] =
         dessertCount * Constants.DISCOUNT_PER_MENU;
     }
@@ -96,7 +96,7 @@ class Controller {
     if (mainCount === 0) {
       return;
     }
-    if (checkDay.isWeekend(date)) {
+    if (checkEventDay.isWeekend(date)) {
       this.#events[Constants.EVENT_TYPE.WEEKEND] =
         mainCount * Constants.DISCOUNT_PER_MENU;
     }
