@@ -12,6 +12,8 @@ const InfoMsg = {
   ORDER: (menu, count) => `${menu} ${count}개`,
   BEFORE_DISCOUNT: (sum) => `\n<할인 전 총주문 금액>\n ${sum}원`,
   PROMOTION: (has) => `\n<증정 메뉴>\n ${has ? "샴페인 1개" : "없음"}`,
+  EVENT_TITLE: "\n<혜택 내역>",
+  CHRISTMAS_EVENT: (discount) => `크리스마스 디데이 할인: -${discount}원`,
 };
 
 export default InfoMsg;

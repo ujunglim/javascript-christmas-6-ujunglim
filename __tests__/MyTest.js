@@ -103,7 +103,7 @@ describe("기능 테스트", () => {
     expect(formatNumberWithComma(input)).toBe(answer);
   });
 
-  test("주문 메뉴 출력", async () => {
+  test("12만원 이상시 샴페인을 증정한다", async () => {
     // given
     const logSpy = getLogSpy();
     mockQuestions(["3", "초코케이크-1,해산물파스타-3"]);
@@ -126,7 +126,7 @@ describe("기능 테스트", () => {
     expectLogContains(getOutput(logSpy), expected);
   });
 
-  test("주문 메뉴 출력", async () => {
+  test("12만원 미만시 샴페인 증정이 없다", async () => {
     // given
     const logSpy = getLogSpy();
     mockQuestions(["3", "초코케이크-1,해산물파스타-1"]);
@@ -144,6 +144,55 @@ describe("기능 테스트", () => {
       "50,000원",
       "<증정 메뉴>",
       "없음",
+    ];
+
+    expectLogContains(getOutput(logSpy), expected);
+  });
+
+  test("총주문 금액 만원 미만시 혜택이 없다", async () => {
+    // given
+    const logSpy = getLogSpy();
+    mockQuestions(["3", "제로콜라-1"]);
+
+    // when
+    const app = new App();
+    await app.run();
+
+    // then
+    const expected = [
+      "<주문 메뉴>",
+      "제로콜라 1개",
+      "<할인 전 총주문 금액>",
+      "3,000원",
+      "<증정 메뉴>",
+      "없음",
+      "<혜택 내역>",
+      "없음",
+    ];
+
+    expectLogContains(getOutput(logSpy), expected);
+  });
+
+  test("25일 크리스마스 디데이 혜택", async () => {
+    // given
+    const logSpy = getLogSpy();
+    mockQuestions(["25", "초코케이크-1,해산물파스타-3"]);
+
+    // when
+    const app = new App();
+    await app.run();
+
+    // then
+    const expected = [
+      "<주문 메뉴>",
+      "초코케이크 1개",
+      "해산물파스타 3개",
+      "<할인 전 총주문 금액>",
+      "120,000원",
+      "<증정 메뉴>",
+      "샴페인 1개",
+      "<혜택 내역>",
+      "크리스마스 디데이 할인: -3,400원",
     ];
 
     expectLogContains(getOutput(logSpy), expected);

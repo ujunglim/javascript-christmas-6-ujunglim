@@ -1,6 +1,9 @@
 const Constants = {
   STANDARD_TO_GET_PROMOTION: 120000,
+  MIN_BILL_TO_GET_EVENT: 10000,
   REGEX_KOREAN: /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+\-[1-9]\d*/,
+  CHRISTMAS: "CHRISTMAS",
+  CHRISTMAS_EVENT_LAST_DATE: 25,
   MENU: {
     양송이수프: 6000,
     타파스: 5500,

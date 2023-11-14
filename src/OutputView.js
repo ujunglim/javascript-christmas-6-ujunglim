@@ -23,6 +23,9 @@ const OutputView = {
   printPromotion(has) {
     Console.print(InfoMsg.PROMOTION(has));
   },
+  printChristmasEvent(discount) {
+    Console.print(InfoMsg.CHRISTMAS_EVENT(discount));
+  },
 };
 
 export default OutputView;

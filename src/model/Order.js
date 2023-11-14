@@ -76,6 +76,10 @@ class Order {
       this.#billBeforeDiscount >= Constants.STANDARD_TO_GET_PROMOTION
     );
   }
+
+  getBillBeforeDiscount() {
+    return this.#billBeforeDiscount;
+  }
 }
 
 export default Order;
