@@ -4,6 +4,7 @@ const Constants = {
   REGEX_KOREAN: /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+\-[1-9]\d*/,
   CHRISTMAS_EVENT_LAST_DATE: 25,
   DISCOUNT_PER_MENU: 2023,
+  MAX_MENU_COUNT: 20,
   EVENT_TYPE: {
     CHRISTMAS: "크리스마스 디데이 할인",
     WEEKDAY: "평일 할인",

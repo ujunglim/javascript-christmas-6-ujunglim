@@ -84,6 +84,12 @@ describe("메뉴입력 예외 테스트", () => {
       new Order("제로콜라-1,레드와인-1");
     }).toThrow(ErrorMsg.ORDERED_ONLY_DRINK);
   });
+
+  test("메뉴는 한번에 최대 20개까지 주문 할 수 있다", () => {
+    expect(() => {
+      new Order("초코케이크-2,해산물파스타-1,바비큐립-22");
+    }).toThrow(ErrorMsg.ORDERED_OVER_MAX_COUNT);
+  });
 });
 
 describe("기능 테스트", () => {

@@ -15,7 +15,8 @@ class Order {
   #validate(input) {
     this.#checkOrderFormat(input);
     this.#checkExistaneAndRedundancy(input);
-    this.#orderedOnlyDrink(input);
+    this.#checkOnlyOrderedDrink();
+    this.#checkOrderedOverMaxCount();
   }
 
   #checkOrderFormat(inputs) {
@@ -45,13 +46,23 @@ class Order {
     });
   }
 
-  #orderedOnlyDrink() {
+  #checkOnlyOrderedDrink() {
     for (const [name, detail] of this.#orderMap) {
       if (detail.type !== Constants.MENU_TYPE.DRINK) {
         return;
       }
     }
     throw new Error(ErrorMsg.ORDERED_ONLY_DRINK);
+  }
+
+  #checkOrderedOverMaxCount() {
+    let totalCount = 0;
+    for (const [name, detail] of this.#orderMap) {
+      totalCount += detail.count;
+      if (totalCount > Constants.MAX_MENU_COUNT) {
+        throw new Error(ErrorMsg.ORDERED_OVER_MAX_COUNT);
+      }
+    }
   }
 
   getOrder() {
