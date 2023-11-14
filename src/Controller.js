@@ -10,8 +10,11 @@ import { Console } from "@woowacourse/mission-utils";
 class Controller {
   #order;
   #events;
+  #totalDiscount;
+
   constructor() {
     this.#events = {};
+    this.#totalDiscount = 0;
   }
 
   async start() {
@@ -22,6 +25,8 @@ class Controller {
     this.#order.calcBeforeDiscount();
     this.#order.checkPromotion();
     this.checkEvents(date);
+    this.showEvents();
+    this.showTotalDiscount();
   }
 
   async getValidDate() {
@@ -54,7 +59,6 @@ class Controller {
   }
 
   checkEvents(date) {
-    Console.print(InfoMsg.EVENT_TITLE);
     // 총주문 금액 10,000원 미만시
     if (this.#order.getBillBeforeDiscount() < Constants.MIN_BILL_TO_GET_EVENT) {
       Console.print("없음");
@@ -65,16 +69,13 @@ class Controller {
     this.checkWeekendMainEvent(date);
     this.checkSpecialEvent(date);
     this.checkPromotionEvent();
-    console.log("=========", this.#events);
   }
 
   checkChristamsEvent(date) {
     if (Number(date) > Constants.CHRISTMAS_EVENT_LAST_DATE) {
       return;
     }
-    // this.#events[Constants.CHRISTMAS] = 1000 + (date - 1) * 100;
-    const discountStr = formatNumberWithComma(1000 + (date - 1) * 100);
-    OutputView.printChristmasEvent(discountStr);
+    this.#events[Constants.EVENT_TYPE.CHRISTMAS] = 1000 + (date - 1) * 100;
   }
   checkWeekdaysDessertEvent(date) {
     const dessertCount = this.#order.getCountOfTargetType(
@@ -116,6 +117,23 @@ class Controller {
     ) {
       this.#events[Constants.EVENT_TYPE.PROMOTION] = 2500;
     }
+  }
+
+  showEvents() {
+    Console.print(InfoMsg.EVENT_TITLE);
+    if (!Object.keys(this.#events).length) {
+      Console.print("없음");
+      return;
+    }
+    Object.entries(this.#events).forEach(([name, discount]) => {
+      OutputView.printEvent(name, formatNumberWithComma(discount));
+      this.#totalDiscount += discount;
+    });
+  }
+
+  showTotalDiscount() {
+    const formatedStr = formatNumberWithComma(this.#totalDiscount);
+    OutputView.printTotalDiscount(formatedStr);
   }
 }
 export default Controller;

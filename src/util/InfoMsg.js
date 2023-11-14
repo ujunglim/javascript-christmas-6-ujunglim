@@ -14,6 +14,7 @@ const InfoMsg = {
   PROMOTION: (has) => `\n<증정 메뉴>\n ${has ? "샴페인 1개" : "없음"}`,
   EVENT_TITLE: "\n<혜택 내역>",
   CHRISTMAS_EVENT: (discount) => `크리스마스 디데이 할인: -${discount}원`,
+  TOTAL_DISCOUNT: (total) => `\n<총혜택 금액>\n-${total}원`,
 };
 
 export default InfoMsg;

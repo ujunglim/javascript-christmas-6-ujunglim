@@ -23,8 +23,11 @@ const OutputView = {
   printPromotion(has) {
     Console.print(InfoMsg.PROMOTION(has));
   },
-  printChristmasEvent(discount) {
-    Console.print(InfoMsg.CHRISTMAS_EVENT(discount));
+  printEvent(name, discount) {
+    Console.print(`${name}: -${discount}원`);
+  },
+  printTotalDiscount(total) {
+    Console.print(InfoMsg.TOTAL_DISCOUNT(total));
   },
 };
 

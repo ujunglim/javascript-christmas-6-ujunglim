@@ -199,6 +199,57 @@ describe("기능 테스트", () => {
   });
 });
 
+describe("기능 테스트", () => {
+  test("모든 정상 출력", async () => {
+    // given
+    const logSpy = getLogSpy();
+    mockQuestions(["10", "레드와인-1,초코케이크-2,해산물파스타-1,바비큐립-2"]);
+
+    // when
+    const app = new App();
+    await app.run();
+
+    // then
+    const expected = [
+      "<주문 메뉴>",
+      "레드와인 1개",
+      "초코케이크 2개",
+      "해산물파스타 1개",
+      "바비큐립 2개",
+      "<할인 전 총주문 금액>",
+      "233,000원",
+      "<증정 메뉴>",
+      "샴페인 1개",
+      "<혜택 내역>",
+      "크리스마스 디데이 할인: -1,900원",
+      "평일 할인: -4,046원",
+      "특별 할인: -1,000원",
+      "증정 이벤트: -2,500원",
+      "<총혜택 금액>",
+      "-9,446원",
+      // "<할인 후 예상 결제 금액>",
+      // "<12월 이벤트 배지>",
+    ];
+
+    expectLogContains(getOutput(logSpy), expected);
+  });
+
+  test("혜택 내역 타이틀과 없음 출력", async () => {
+    // given
+    const logSpy = getLogSpy();
+    mockQuestions(["26", "타파스-1,제로콜라-1"]);
+
+    // when
+    const app = new App();
+    await app.run();
+
+    // then
+    const expected = ["<혜택 내역>" + LINE_SEPARATOR + "없음"];
+
+    expectLogContains(getOutput(logSpy), expected);
+  });
+});
+
 // describe("평일 할인", () => {
 //   test("평일에 디저트를 주문할 때 할인가격", () => {
 //     const ctrl = new Controller();
