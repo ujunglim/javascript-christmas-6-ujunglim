@@ -5,21 +5,21 @@ const Constants = {
   CHRISTMAS: "CHRISTMAS",
   CHRISTMAS_EVENT_LAST_DATE: 25,
   MENU: {
-    양송이수프: 6000,
-    타파스: 5500,
-    시저샐러드: 8000,
+    양송이수프: { cost: 6000, type: "APPETIZER" },
+    타파스: { cost: 5500, type: "APPETIZER" },
+    시저샐러드: { cost: 8000, type: "APPETIZER" },
 
-    티본스테이크: 55000,
-    바비큐립: 54000,
-    해산물파스타: 35000,
-    크리스마스파스타: 25000,
+    티본스테이크: { cost: 55000, type: "MAIN" },
+    바비큐립: { cost: 54000, type: "MAIN" },
+    해산물파스타: { cost: 35000, type: "MAIN" },
+    크리스마스파스타: { cost: 25000, type: "MAIN" },
 
-    초코케이크: 15000,
-    아이스크림: 5000,
+    초코케이크: { cost: 15000, type: "DESSERT" },
+    아이스크림: { cost: 5000, type: "DESSERT" },
 
-    제로콜라: 3000,
-    레드와인: 60000,
-    샴페인: 25000,
+    제로콜라: { cost: 3000, type: "DRINK" },
+    레드와인: { cost: 60000, type: "DRINK" },
+    샴페인: { cost: 25000, type: "DRINK" },
   },
 };
 export default Constants;

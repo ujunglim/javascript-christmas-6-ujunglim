@@ -13,9 +13,9 @@ const OutputView = {
   },
   printOrder(orders) {
     Console.print(InfoMsg.ORDER_TITLE);
-    orders.forEach((order) =>
-      Console.print(InfoMsg.ORDER(order.name, order.count))
-    );
+    orders.forEach((detail, name) => {
+      Console.print(InfoMsg.ORDER(name, detail.count));
+    });
   },
   printBeforeDiscount(sum) {
     Console.print(InfoMsg.BEFORE_DISCOUNT(sum));

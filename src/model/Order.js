@@ -4,19 +4,17 @@ import ErrorMsg from "../util/ErrorMsg.js";
 import formatNumberWithComma from "../util/formatNumberWithComma.js";
 
 class Order {
-  #orders;
+  #orderMap;
   #billBeforeDiscount;
 
   constructor(input) {
-    this.#orders = [];
+    this.#orderMap = new Map();
     this.#validate(input);
   }
 
   #validate(input) {
     this.#checkOrderFormat(input);
-    const orderArr = this.#getSplittedOrder(input);
-    this.#checkMenuExistance(orderArr);
-    this.#checkMenuReundancy(orderArr);
+    this.#checkExistaneAndRedundancy(input);
   }
 
   #checkOrderFormat(inputs) {
@@ -27,43 +25,34 @@ class Order {
     });
   }
 
-  #getSplittedOrder(inputs) {
-    const orderArr = [];
+  #checkExistaneAndRedundancy(inputs) {
     inputs.split(",").forEach((input) => {
-      const [menu, count] = input.split("-");
-      orderArr.push({
-        name: menu,
-        count: Number(count),
-      });
-    });
-    return orderArr;
-  }
-
-  #checkMenuExistance(orderArr) {
-    orderArr.forEach((order) => {
-      if (!Object.keys(Constants.MENU).includes(order.name)) {
+      const [name, count] = input.split("-");
+      // 없는 메뉴이거나 중복된 메뉴 입력시
+      if (!Constants.MENU[name] || this.#orderMap.has(name)) {
         throw new Error(ErrorMsg.INVALID_ORDER);
       }
+      this.#addOrder(name, count);
     });
   }
 
-  #checkMenuReundancy(orderArr) {
-    const menus = orderArr.map((order) => order.name);
-    if (orderArr.length !== new Set(menus).size) {
-      throw new Error(ErrorMsg.INVALID_ORDER);
-    }
-    this.#orders = orderArr;
+  #addOrder(name, count) {
+    this.#orderMap.set(name, {
+      count: Number(count),
+      cost: Constants.MENU[name]?.cost,
+      type: Constants.MENU[name]?.type,
+    });
   }
 
   getOrder() {
-    return this.#orders;
+    return this.#orderMap;
   }
 
   calcBeforeDiscount() {
     let sum = 0;
-    this.#orders.forEach((order) => {
-      const { name, count } = order;
-      sum += Constants.MENU[name] * count;
+    this.#orderMap.forEach((detail, name) => {
+      const { count, cost } = detail;
+      sum += cost * count;
     });
     this.#billBeforeDiscount = sum;
     // 1000단위 나누기
