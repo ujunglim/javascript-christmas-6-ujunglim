@@ -20,6 +20,9 @@ const OutputView = {
   printBeforeDiscount(sum) {
     Console.print(InfoMsg.BEFORE_DISCOUNT(sum));
   },
+  printPromotion(has) {
+    Console.print(InfoMsg.PROMOTION(has));
+  },
 };
 
 export default OutputView;

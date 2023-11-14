@@ -119,6 +119,31 @@ describe("기능 테스트", () => {
       "해산물파스타 3개",
       "<할인 전 총주문 금액>",
       "120,000원",
+      "<증정 메뉴>",
+      "샴페인 1개",
+    ];
+
+    expectLogContains(getOutput(logSpy), expected);
+  });
+
+  test("주문 메뉴 출력", async () => {
+    // given
+    const logSpy = getLogSpy();
+    mockQuestions(["3", "초코케이크-1,해산물파스타-1"]);
+
+    // when
+    const app = new App();
+    await app.run();
+
+    // then
+    const expected = [
+      "<주문 메뉴>",
+      "초코케이크 1개",
+      "해산물파스타 1개",
+      "<할인 전 총주문 금액>",
+      "50,000원",
+      "<증정 메뉴>",
+      "없음",
     ];
 
     expectLogContains(getOutput(logSpy), expected);

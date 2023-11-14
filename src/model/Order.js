@@ -5,6 +5,7 @@ import formatNumberWithComma from "../util/formatNumberWithComma.js";
 
 class Order {
   #orders;
+  #billBeforeDiscount;
 
   constructor(input) {
     this.#orders = [];
@@ -64,9 +65,16 @@ class Order {
       const { name, count } = order;
       sum += Constants.MENU[name] * count;
     });
+    this.#billBeforeDiscount = sum;
     // 1000단위 나누기
     const formattedStr = formatNumberWithComma(sum);
     OutputView.printBeforeDiscount(formattedStr);
+  }
+
+  checkPromotion() {
+    OutputView.printPromotion(
+      this.#billBeforeDiscount >= Constants.STANDARD_TO_GET_PROMOTION
+    );
   }
 }
 

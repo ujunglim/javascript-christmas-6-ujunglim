@@ -13,6 +13,7 @@ class Controller {
     const orders = await this.getValidOrder();
     this.printOrder(date, orders);
     this.#order.calcBeforeDiscount();
+    this.#order.checkPromotion();
   }
 
   async getValidDate() {

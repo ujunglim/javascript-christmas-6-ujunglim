@@ -1,4 +1,5 @@
 const Constants = {
+  STANDARD_TO_GET_PROMOTION: 120000,
   REGEX_KOREAN: /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+\-[1-9]\d*/,
   MENU: {
     양송이수프: 6000,
