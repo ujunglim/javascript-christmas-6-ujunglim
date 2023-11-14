@@ -9,6 +9,7 @@ const Constants = {
     WEEKDAY: "WEEKDAY",
     WEEKEND: "WEEKEND",
     SPECIAL: "SPECIAL",
+    PROMOTION: "PROMOTION",
   },
   MENU_TYPE: {
     APPETIZER: "APPETIZER",
