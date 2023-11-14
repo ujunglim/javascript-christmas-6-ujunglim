@@ -29,6 +29,9 @@ const OutputView = {
   printTotalDiscount(total) {
     Console.print(InfoMsg.TOTAL_DISCOUNT(total));
   },
+  printAfterDiscountBill(bill) {
+    Console.print(InfoMsg.AFTER_DISCOUNT_BILL(bill));
+  },
 };
 
 export default OutputView;

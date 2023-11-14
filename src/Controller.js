@@ -27,6 +27,7 @@ class Controller {
     this.checkEvents(date);
     this.showEvents();
     this.showTotalDiscount();
+    this.showAfterDiscountBill();
   }
 
   async getValidDate() {
@@ -134,6 +135,13 @@ class Controller {
   showTotalDiscount() {
     const formatedStr = formatNumberWithComma(this.#totalDiscount);
     OutputView.printTotalDiscount(formatedStr);
+  }
+
+  showAfterDiscountBill() {
+    const afterDiscount = formatNumberWithComma(
+      this.#order.getBillBeforeDiscount() - this.#totalDiscount
+    );
+    OutputView.printAfterDiscountBill(afterDiscount);
   }
 }
 export default Controller;

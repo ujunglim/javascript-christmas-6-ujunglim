@@ -15,6 +15,7 @@ const InfoMsg = {
   EVENT_TITLE: "\n<혜택 내역>",
   CHRISTMAS_EVENT: (discount) => `크리스마스 디데이 할인: -${discount}원`,
   TOTAL_DISCOUNT: (total) => `\n<총혜택 금액>\n-${total}원`,
+  AFTER_DISCOUNT_BILL: (bill) => `\n<할인 후 예상 결제 금액>\n${bill}원`,
 };
 
 export default InfoMsg;
