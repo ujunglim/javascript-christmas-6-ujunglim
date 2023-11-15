@@ -57,37 +57,37 @@ describe("날짜입력 예외 테스트", () => {
 describe("메뉴입력 예외 테스트", () => {
   test("메뉴이름과 갯수를-로 구분하지 않았을 때", () => {
     expect(() => {
-      InputValidator.Order("해산물파스타3");
+      InputValidator.order("해산물파스타3");
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 
   test("메뉴 갯수를 1미만 입력 시", () => {
     expect(() => {
-      InputValidator.Order("해산물파스타-0");
+      InputValidator.order("해산물파스타-0");
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 
   test("메뉴판에 없는 메뉴 입력시 ", () => {
     expect(() => {
-      InputValidator.Order("김치찌개-2");
+      InputValidator.order("김치찌개-2");
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 
   test("중복된 메뉴 입력시", () => {
     expect(() => {
-      InputValidator.Order("해산물파스타-2,해산물파스타-1");
+      InputValidator.order("해산물파스타-2,해산물파스타-1");
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 
   test("음료수만 주문할 수 없다", () => {
     expect(() => {
-      InputValidator.Order("제로콜라-1,레드와인-1");
+      InputValidator.order("제로콜라-1,레드와인-1");
     }).toThrow(ErrorMsg.ORDERED_ONLY_DRINK);
   });
 
   test("메뉴는 한번에 최대 20개까지 주문 할 수 있다", () => {
     expect(() => {
-      InputValidator.Order("초코케이크-2,해산물파스타-1,바비큐립-22");
+      InputValidator.order("초코케이크-2,해산물파스타-1,바비큐립-22");
     }).toThrow(ErrorMsg.ORDERED_OVER_MAX_COUNT);
   });
 });

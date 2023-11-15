@@ -39,7 +39,7 @@ class Controller {
   async getValidDate() {
     return this.getValidInput(
       InputView.readDate,
-      InputValidator.Date,
+      InputValidator.date,
       Constants.INPUT_TYPES.DATE
     );
   }
@@ -47,7 +47,7 @@ class Controller {
   async getValidOrder() {
     return this.getValidInput(
       InputView.readOrder,
-      InputValidator.Order,
+      InputValidator.order,
       Constants.INPUT_TYPES.ORDER
     );
   }
