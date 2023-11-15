@@ -2,8 +2,8 @@ import InputView from "./InputView.js";
 import OutputView from "./OutputView.js";
 import Order from "./model/Order.js";
 import Constants from "./util/Constants.js";
-import DateValidator from "./util/DateValidator.js";
 import InfoMsg from "./util/InfoMsg.js";
+import InputVaildator from "./util/InputValidator.js";
 import checkEventDay from "./util/checkEventDay.js";
 import formatNumberWithComma from "./util/formatNumberWithComma.js";
 import { Console } from "@woowacourse/mission-utils";
@@ -44,7 +44,7 @@ class Controller {
   }
 
   async getValidDate() {
-    return this.getValidInput(InputView.readDate, DateValidator);
+    return this.getValidInput(InputView.readDate, InputVaildator.Date);
   }
 
   async getValidOrder() {
