@@ -78,11 +78,11 @@ class Order {
     this.#billBeforeDiscount = sum;
     // 1000단위 나누기
     const formattedStr = formatNumberWithComma(sum);
-    OutputView.printBeforeDiscount(formattedStr);
+    OutputView.displayBeforeDiscount(formattedStr);
   }
 
   checkPromotion() {
-    OutputView.printPromotion(
+    OutputView.displayPromotion(
       this.#billBeforeDiscount >= Constants.STANDARD_TO_GET_PROMOTION
     );
   }

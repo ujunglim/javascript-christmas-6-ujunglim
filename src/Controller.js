@@ -18,10 +18,10 @@ class Controller {
   }
 
   async start() {
-    OutputView.printGreeting();
+    OutputView.displayGreeting();
     const date = await this.getValidDate();
     const orders = await this.getValidOrder();
-    this.printOrder(date, orders);
+    this.displayOrder(date, orders);
     this.#order.calcBeforeDiscount();
     this.#order.checkPromotion();
     this.checkEvents(date);
@@ -38,7 +38,7 @@ class Controller {
         DateValidator(input);
         return Number(input);
       } catch (error) {
-        OutputView.print(error.message);
+        OutputView.display(error.message);
       }
     }
   }
@@ -50,20 +50,20 @@ class Controller {
         this.#order = new Order(input);
         return this.#order.getOrder();
       } catch (error) {
-        OutputView.print(error.message);
+        OutputView.display(error.message);
       }
     }
   }
 
-  printOrder(date, orders) {
-    OutputView.printEventPreviewTitle(date);
-    OutputView.printOrder(orders);
+  displayOrder(date, orders) {
+    OutputView.displayEventPreviewTitle(date);
+    OutputView.displayOrder(orders);
   }
 
   checkEvents(date) {
     // 총주문 금액 10,000원 미만시
     if (this.#order.getBillBeforeDiscount() < Constants.MIN_BILL_TO_GET_EVENT) {
-      Console.print("없음");
+      OutputView.display("없음");
       return;
     }
     this.checkChristamsEvent(date);
@@ -122,27 +122,27 @@ class Controller {
   }
 
   showEvents() {
-    Console.print(InfoMsg.EVENT_TITLE);
+    OutputView.displayEventTitle();
     if (!Object.keys(this.#events).length) {
-      Console.print("없음");
+      OutputView.display("없음");
       return;
     }
     Object.entries(this.#events).forEach(([name, discount]) => {
-      OutputView.printEvent(name, formatNumberWithComma(discount));
+      OutputView.displayEvent(name, formatNumberWithComma(discount));
       this.#totalDiscount += discount;
     });
   }
 
   showTotalDiscount() {
     const formatedStr = formatNumberWithComma(this.#totalDiscount);
-    OutputView.printTotalDiscount(formatedStr);
+    OutputView.displayTotalDiscount(formatedStr);
   }
 
   showAfterDiscountBill() {
     const afterDiscount = formatNumberWithComma(
       this.#order.getBillBeforeDiscount() - this.#totalDiscount
     );
-    OutputView.printAfterDiscountBill(afterDiscount);
+    OutputView.displayAfterDiscountBill(afterDiscount);
   }
 
   checkBadge() {
@@ -156,7 +156,7 @@ class Controller {
     } else if (this.#totalDiscount >= 5000) {
       badge = "별";
     }
-    Console.print(InfoMsg.BADGE(badge));
+    OutputView.displayBadge(badge);
   }
 }
 export default Controller;

@@ -2,35 +2,41 @@ import { Console } from "@woowacourse/mission-utils";
 import InfoMsg from "./util/InfoMsg.js";
 
 const OutputView = {
-  print(msg) {
+  display(msg) {
     Console.print(msg);
   },
-  printGreeting() {
+  displayGreeting() {
     Console.print(InfoMsg.GREETING);
   },
-  printEventPreviewTitle(date) {
+  displayEventPreviewTitle(date) {
     Console.print(InfoMsg.EVENT_PREVIEW_TITLE(date));
   },
-  printOrder(orders) {
+  displayOrder(orders) {
     Console.print(InfoMsg.ORDER_TITLE);
     orders.forEach((detail, name) => {
       Console.print(InfoMsg.ORDER(name, detail.count));
     });
   },
-  printBeforeDiscount(sum) {
+  displayBeforeDiscount(sum) {
     Console.print(InfoMsg.BEFORE_DISCOUNT(sum));
   },
-  printPromotion(has) {
+  displayPromotion(has) {
     Console.print(InfoMsg.PROMOTION(has));
   },
-  printEvent(name, discount) {
+  displayEventTitle() {
+    Console.print(InfoMsg.EVENT_TITLE);
+  },
+  displayEvent(name, discount) {
     Console.print(`${name}: -${discount}원`);
   },
-  printTotalDiscount(total) {
+  displayTotalDiscount(total) {
     Console.print(InfoMsg.TOTAL_DISCOUNT(total));
   },
-  printAfterDiscountBill(bill) {
+  displayAfterDiscountBill(bill) {
     Console.print(InfoMsg.AFTER_DISCOUNT_BILL(bill));
+  },
+  displayBadge(badge) {
+    Console.print(InfoMsg.BADGE(badge));
   },
 };
 
