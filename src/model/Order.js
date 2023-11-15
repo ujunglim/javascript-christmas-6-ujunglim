@@ -1,60 +1,26 @@
 import OutputView from "../OutputView.js";
 import Constants from "../util/Constants.js";
 import ErrorMsg from "../util/ErrorMsg.js";
-import InputVaildator from "../util/InputValidator.js";
+import InputValidator from "../util/InputValidator.js";
 import formatNumberWithComma from "../util/formatNumberWithComma.js";
 
 class Order {
   #orderMap;
 
   constructor(input) {
+    this.#converOrderStr(input);
+  }
+
+  #converOrderStr(inputs) {
     this.#orderMap = new Map();
-    this.#validate(input);
-  }
-
-  #validate(input) {
-    InputVaildator.Order(input);
-    this.#checkExistaneAndRedundancy(input);
-    this.#checkOnlyOrderedDrink();
-    this.#checkOrderedOverMaxCount();
-  }
-
-  #checkExistaneAndRedundancy(inputs) {
     inputs.split(",").forEach((input) => {
       const [name, count] = input.split("-");
-      // 없는 메뉴이거나 중복된 메뉴 입력시
-      if (!Constants.MENU[name] || this.#orderMap.has(name)) {
-        throw new Error(ErrorMsg.INVALID_ORDER);
-      }
-      this.#addOrder(name, count);
+      this.#orderMap.set(name, {
+        count: Number(count),
+        cost: Constants.MENU[name]?.cost,
+        type: Constants.MENU[name]?.type,
+      });
     });
-  }
-
-  #addOrder(name, count) {
-    this.#orderMap.set(name, {
-      count: Number(count),
-      cost: Constants.MENU[name]?.cost,
-      type: Constants.MENU[name]?.type,
-    });
-  }
-
-  #checkOnlyOrderedDrink() {
-    for (const [name, detail] of this.#orderMap) {
-      if (detail.type !== Constants.MENU_TYPE.DRINK) {
-        return;
-      }
-    }
-    throw new Error(ErrorMsg.ORDERED_ONLY_DRINK);
-  }
-
-  #checkOrderedOverMaxCount() {
-    let totalCount = 0;
-    for (const [name, detail] of this.#orderMap) {
-      totalCount += detail.count;
-      if (totalCount > Constants.MAX_MENU_COUNT) {
-        throw new Error(ErrorMsg.ORDERED_OVER_MAX_COUNT);
-      }
-    }
   }
 
   checkAbleToGetEvent() {

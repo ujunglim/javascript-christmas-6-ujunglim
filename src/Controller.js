@@ -2,11 +2,9 @@ import InputView from "./InputView.js";
 import OutputView from "./OutputView.js";
 import Order from "./model/Order.js";
 import Constants from "./util/Constants.js";
-import InfoMsg from "./util/InfoMsg.js";
-import InputVaildator from "./util/InputValidator.js";
+import InputValidator from "./util/InputValidator.js";
 import checkEventDay from "./util/checkEventDay.js";
 import formatNumberWithComma from "./util/formatNumberWithComma.js";
-import { Console } from "@woowacourse/mission-utils";
 class Controller {
   #order;
   #events;
@@ -21,6 +19,7 @@ class Controller {
     OutputView.displayGreeting();
     const date = await this.getValidDate();
     const orders = await this.getValidOrder();
+    this.#order = new Order(orders);
     this.displayOrder(date, orders);
     this.#order.displayBillBeforeDiscount();
     this.#order.checkPromotion();
@@ -31,12 +30,12 @@ class Controller {
     this.checkBadge();
   }
 
-  async getValidInput(inputFunc, validationFunc) {
+  async getValidInput(inputFunc, validationFunc, type) {
     while (true) {
       try {
         const input = await inputFunc();
         validationFunc(input);
-        return Number(input);
+        return type === Constants.INPUT_TYPES.DATE ? Number(input) : input;
       } catch (err) {
         OutputView.display(err.message);
       }
@@ -44,24 +43,24 @@ class Controller {
   }
 
   async getValidDate() {
-    return this.getValidInput(InputView.readDate, InputVaildator.Date);
+    return this.getValidInput(
+      InputView.readDate,
+      InputValidator.Date,
+      Constants.INPUT_TYPES.DATE
+    );
   }
 
   async getValidOrder() {
-    while (true) {
-      try {
-        const input = await InputView.readOrder();
-        this.#order = new Order(input);
-        return this.#order.getOrder();
-      } catch (error) {
-        OutputView.display(error.message);
-      }
-    }
+    return this.getValidInput(
+      InputView.readOrder,
+      InputValidator.Order,
+      Constants.INPUT_TYPES.ORDER
+    );
   }
 
   displayOrder(date, orders) {
     OutputView.displayEventPreviewTitle(date);
-    OutputView.displayOrder(orders);
+    OutputView.displayOrder(this.#order.getOrder());
   }
 
   checkEvents(date) {

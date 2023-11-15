@@ -1,4 +1,8 @@
 const Constants = {
+  INPUT_TYPES: {
+    DATE: "DATE",
+    ORDER: "ORDER",
+  },
   STANDARD_TO_GET_PROMOTION: 120000,
   MIN_BILL_TO_GET_EVENT: 10000,
   REGEX_KOREAN: /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+\-[1-9]\d*/,

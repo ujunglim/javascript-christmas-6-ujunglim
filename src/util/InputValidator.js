@@ -1,7 +1,7 @@
 import Constants from "./Constants.js";
 import ErrorMsg from "./ErrorMsg.js";
 
-class InputVaildator {
+class InputValidator {
   static Date(date) {
     const numDate = Number(date);
     if (isNaN(numDate) || numDate < 1 || numDate > 31) {
@@ -11,8 +11,11 @@ class InputVaildator {
   }
 
   static Order(orders) {
-    InputVaildator.CheckOrderFormat(orders);
-    InputVaildator.CheckOrderNonExist(orders);
+    InputValidator.CheckOrderFormat(orders);
+    InputValidator.CheckOrderNonExist(orders);
+    InputValidator.CheckOrderRedundancy(orders);
+    InputValidator.CheckOrderOnlyDrink(orders);
+    InputValidator.CheckOrderOverMaxCount(orders);
   }
 
   static CheckOrderFormat(orders) {
@@ -33,15 +36,44 @@ class InputVaildator {
     });
   }
 
-  // static CheckOrderRedundancy(orders) {
-  //   const names = orders.split(",").map((order) => {
-  //     const [name, count] = order.split("-");
-  //     return name;
-  //   });
-  //   if (names.length !== new Set(names).size) {
-  //     throw new Error(ErrorMsg.INVALID_ORDER);
-  //   }
-  // }
+  static CheckOrderRedundancy(orders) {
+    const names = orders.split(",").map((order) => {
+      const [name, count] = order.split("-");
+      return name;
+    });
+    if (names.length !== new Set(names).size) {
+      throw new Error(ErrorMsg.INVALID_ORDER);
+    }
+  }
+
+  static CheckOrderOnlyDrink(orders) {
+    const names = orders.split(",").map((order) => {
+      const [name, count] = order.split("-");
+      return name;
+    });
+    for (const name of names) {
+      if (Constants.MENU[name].type !== Constants.MENU_TYPE.DRINK) {
+        return;
+      }
+    }
+    throw new Error(ErrorMsg.ORDERED_ONLY_DRINK);
+  }
+
+  static CheckOrderOverMaxCount(orders) {
+    let totalCount = 0;
+    const counts = orders.split(",").map((order) => {
+      const [name, count] = order.split("-");
+      return Number(count);
+    });
+    console.log(counts);
+    for (const count of counts) {
+      totalCount += count;
+      if (totalCount > Constants.MAX_MENU_COUNT) {
+        throw new Error(ErrorMsg.ORDERED_OVER_MAX_COUNT);
+      }
+    }
+    return;
+  }
 }
 
-export default InputVaildator;
+export default InputValidator;
