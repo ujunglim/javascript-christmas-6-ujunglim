@@ -22,7 +22,7 @@ class Controller {
     const date = await this.getValidDate();
     const orders = await this.getValidOrder();
     this.displayOrder(date, orders);
-    this.#order.calcBeforeDiscount();
+    this.#order.displayBillBeforeDiscount();
     this.#order.checkPromotion();
     this.checkEvents(date);
     this.showEvents();

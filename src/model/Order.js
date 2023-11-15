@@ -5,7 +5,6 @@ import formatNumberWithComma from "../util/formatNumberWithComma.js";
 
 class Order {
   #orderMap;
-  #billBeforeDiscount;
 
   constructor(input) {
     this.#orderMap = new Map();
@@ -69,26 +68,24 @@ class Order {
     return this.#orderMap;
   }
 
-  calcBeforeDiscount() {
+  getBillBeforeDiscount() {
     let sum = 0;
     this.#orderMap.forEach((detail, name) => {
       const { count, cost } = detail;
       sum += cost * count;
     });
-    this.#billBeforeDiscount = sum;
-    // 1000단위 나누기
-    const formattedStr = formatNumberWithComma(sum);
+    return sum;
+  }
+
+  displayBillBeforeDiscount() {
+    const formattedStr = formatNumberWithComma(this.getBillBeforeDiscount());
     OutputView.displayBeforeDiscount(formattedStr);
   }
 
   checkPromotion() {
     OutputView.displayPromotion(
-      this.#billBeforeDiscount >= Constants.STANDARD_TO_GET_PROMOTION
+      this.getBillBeforeDiscount() >= Constants.STANDARD_TO_GET_PROMOTION
     );
-  }
-
-  getBillBeforeDiscount() {
-    return this.#billBeforeDiscount;
   }
 
   getCountOfTargetType(targetType) {
