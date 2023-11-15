@@ -20,7 +20,7 @@ class Controller {
     const date = await this.getValidDate();
     const orders = await this.getValidOrder();
     this.#order = new Order(orders);
-    this.displayOrder(date, orders);
+    this.#order.displayOrder(date);
     this.#order.displayBillBeforeDiscount();
     this.#order.checkPromotion();
     this.checkEvents(date);
@@ -56,11 +56,6 @@ class Controller {
       InputValidator.Order,
       Constants.INPUT_TYPES.ORDER
     );
-  }
-
-  displayOrder(date, orders) {
-    OutputView.displayEventPreviewTitle(date);
-    OutputView.displayOrder(this.#order.getOrder());
   }
 
   checkEvents(date) {

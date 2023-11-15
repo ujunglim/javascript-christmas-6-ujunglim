@@ -1,7 +1,5 @@
 import OutputView from "../OutputView.js";
 import Constants from "../util/Constants.js";
-import ErrorMsg from "../util/ErrorMsg.js";
-import InputValidator from "../util/InputValidator.js";
 import formatNumberWithComma from "../util/formatNumberWithComma.js";
 
 class Order {
@@ -28,6 +26,11 @@ class Order {
       OutputView.display("없음"); // 총주문 금액 만원 미만시 이벤트가 없다
       return;
     }
+  }
+
+  displayOrder(date) {
+    OutputView.displayEventPreviewTitle(date);
+    OutputView.displayOrder(this.#orderMap);
   }
 
   getOrder() {
