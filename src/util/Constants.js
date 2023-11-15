@@ -16,6 +16,12 @@ const Constants = {
     SPECIAL: "특별 할인",
     PROMOTION: "증정 이벤트",
   },
+  BADGE: {
+    20000: "산타",
+    10000: "트리",
+    5000: "별",
+    0: null,
+  },
   MENU_TYPE: {
     APPETIZER: "APPETIZER",
     MAIN: "MAIN",

@@ -95,6 +95,12 @@ class Event {
     );
     OutputView.displayAfterDiscountBill(afterDiscount);
   }
+
+  displayBadge() {
+    const totalDiscount = this.#getTotalDiscount();
+    const badge = Constants.BADGE[String(totalDiscount)];
+    OutputView.displayBadge(badge);
+  }
 }
 
 export default Event;

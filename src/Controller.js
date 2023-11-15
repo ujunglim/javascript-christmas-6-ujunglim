@@ -6,13 +6,8 @@ import Constants from "./util/Constants.js";
 import InputValidator from "./util/InputValidator.js";
 class Controller {
   #order;
-  #events;
-  #totalDiscount;
 
-  constructor() {
-    this.#events = {};
-    this.#totalDiscount = 0;
-  }
+  constructor() {}
 
   async start() {
     OutputView.displayGreeting();
@@ -25,10 +20,10 @@ class Controller {
     this.#order.checkAbleToGetEvent();
     const event = new Event();
     event.checkEvents(date, this.#order);
-    event.displayEvents(this.#totalDiscount);
-    event.displayTotalDiscount(this.#totalDiscount);
+    event.displayEvents();
+    event.displayTotalDiscount();
     event.displayAfterDiscountBill(this.#order);
-    this.displayBadge();
+    event.displayBadge();
   }
 
   async getValidInput(inputFunc, validationFunc, type) {
@@ -57,20 +52,6 @@ class Controller {
       InputValidator.Order,
       Constants.INPUT_TYPES.ORDER
     );
-  }
-
-  displayBadge() {
-    let badge;
-    if (this.#totalDiscount === 0) {
-      badge = null;
-    } else if (this.#totalDiscount >= 20000) {
-      badge = "산타";
-    } else if (this.#totalDiscount >= 10000) {
-      badge = "트리";
-    } else if (this.#totalDiscount >= 5000) {
-      badge = "별";
-    }
-    OutputView.displayBadge(badge);
   }
 }
 export default Controller;
