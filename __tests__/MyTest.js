@@ -268,7 +268,7 @@ describe("기능 테스트", () => {
 //   test("평일에 디저트를 주문할 때 할인가격", () => {
 //     const ctrl = new Controller();
 //     ctrl.start();
-//     const a = ctrl.checkWeekdaysDessertEvent(3);
+//     const a = ctrl.checkWeekday(3);
 //     expect(a).toBe(2023);
 //   });
 // });
@@ -284,7 +284,7 @@ describe("기능 테스트", () => {
 //   test("평일에 디저트를 주문할 때 할인가격", () => {
 //     expect(() => {
 //       const order = new Order("해산물파스타-2");
-//       order.checkWeekdaysDessertEvent(3)
+//       order.checkWeekday(3)
 //     }).toBe({});
 //   });
 // });
