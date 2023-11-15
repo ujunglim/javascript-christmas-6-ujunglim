@@ -12,10 +12,10 @@ class Event {
 
   checkEvents(date, order) {
     this.checkChristams(date);
-    this.checkWeekday(date, order);
-    this.checkWeekend(date, order);
-    this.checkSpecialday(date);
-    this.checkPromotionEvent(order);
+    this.#checkWeekday(date, order);
+    this.#checkWeekend(date, order);
+    this.#checkSpecialday(date);
+    this.#checkPromotionEvent(order);
   }
 
   checkChristams(date) {
@@ -26,7 +26,7 @@ class Event {
   }
 
   // 평일 디저트 이벤트
-  checkWeekday(date, order) {
+  #checkWeekday(date, order) {
     const dessertCount = order.getCountOfTargetType(
       Constants.MENU_TYPE.DESSERT
     );
@@ -42,7 +42,7 @@ class Event {
   }
 
   // 주말 메인메뉴 이벤트
-  checkWeekend(date, order) {
+  #checkWeekend(date, order) {
     const mainCount = order.getCountOfTargetType(Constants.MENU_TYPE.MAIN);
     if (mainCount === 0) {
       return;
@@ -53,13 +53,13 @@ class Event {
     }
   }
 
-  checkSpecialday(date) {
+  #checkSpecialday(date) {
     if (checkEventDay.isSpecialDay(date)) {
       this.#events[Constants.EVENT_TYPE.SPECIAL] = 1000;
     }
   }
 
-  checkPromotionEvent(order) {
+  #checkPromotionEvent(order) {
     if (order.getBillBeforeDiscount() >= Constants.STANDARD_TO_GET_PROMOTION) {
       this.#events[Constants.EVENT_TYPE.PROMOTION] = 2500;
     }
