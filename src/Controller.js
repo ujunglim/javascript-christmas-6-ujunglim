@@ -31,16 +31,20 @@ class Controller {
     this.checkBadge();
   }
 
-  async getValidDate() {
+  async getValidInput(inputFunc, validationFunc) {
     while (true) {
       try {
-        const input = await InputView.readDate();
-        DateValidator(input);
+        const input = await inputFunc();
+        validationFunc(input);
         return Number(input);
-      } catch (error) {
-        OutputView.display(error.message);
+      } catch (err) {
+        OutputView.display(err.message);
       }
     }
+  }
+
+  async getValidDate() {
+    return this.getValidInput(InputView.readDate, DateValidator);
   }
 
   async getValidOrder() {
