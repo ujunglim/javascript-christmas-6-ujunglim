@@ -22,7 +22,8 @@ class Event {
     if (Number(date) > Constants.CHRISTMAS_EVENT_LAST_DATE) {
       return;
     }
-    this.#events[Constants.EVENT_TYPE.CHRISTMAS] = 1000 + (date - 1) * 100;
+    this.#events[Constants.EVENT_TYPE.CHRISTMAS] =
+      Constants.THOUSAND + (date - 1) * 100;
   }
 
   // 평일 디저트 이벤트
@@ -55,13 +56,13 @@ class Event {
 
   #checkSpecialday(date) {
     if (checkEventDay.isSpecialDay(date)) {
-      this.#events[Constants.EVENT_TYPE.SPECIAL] = 1000;
+      this.#events[Constants.EVENT_TYPE.SPECIAL] = Constants.THOUSAND;
     }
   }
 
   #checkPromotionEvent(order) {
     if (order.getBillBeforeDiscount() >= Constants.STANDARD_TO_GET_PROMOTION) {
-      this.#events[Constants.EVENT_TYPE.PROMOTION] = 2500;
+      this.#events[Constants.EVENT_TYPE.PROMOTION] = 25000;
     }
   }
 
@@ -98,7 +99,14 @@ class Event {
 
   displayBadge() {
     const totalDiscount = this.#getTotalDiscount();
-    const badge = Constants.BADGE[String(totalDiscount)];
+    let badge = null;
+    if (totalDiscount >= 20000) {
+      badge = Constants.BADGE.FIRST;
+    } else if (totalDiscount >= 10000) {
+      badge = Constants.BADGE.SECOND;
+    } else if (totalDiscount >= 5000) {
+      badge = Constants.BADGE.THIRD;
+    }
     OutputView.displayBadge(badge);
   }
 }

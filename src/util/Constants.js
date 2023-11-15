@@ -9,6 +9,7 @@ const Constants = {
   CHRISTMAS_EVENT_LAST_DATE: 25,
   DISCOUNT_PER_MENU: 2023,
   MAX_MENU_COUNT: 20,
+  THOUSAND: 1000,
   EVENT_TYPE: {
     CHRISTMAS: "크리스마스 디데이 할인",
     WEEKDAY: "평일 할인",
@@ -17,10 +18,9 @@ const Constants = {
     PROMOTION: "증정 이벤트",
   },
   BADGE: {
-    20000: "산타",
-    10000: "트리",
-    5000: "별",
-    0: null,
+    FIRST: "산타",
+    SECOND: "트리",
+    THIRD: "별",
   },
   MENU_TYPE: {
     APPETIZER: "APPETIZER",
