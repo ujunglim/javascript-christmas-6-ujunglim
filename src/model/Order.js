@@ -1,6 +1,7 @@
 import OutputView from "../OutputView.js";
 import Constants from "../util/Constants.js";
 import ErrorMsg from "../util/ErrorMsg.js";
+import InputVaildator from "../util/InputValidator.js";
 import formatNumberWithComma from "../util/formatNumberWithComma.js";
 
 class Order {
@@ -12,18 +13,10 @@ class Order {
   }
 
   #validate(input) {
-    this.#checkOrderFormat(input);
+    InputVaildator.Order(input);
     this.#checkExistaneAndRedundancy(input);
     this.#checkOnlyOrderedDrink();
     this.#checkOrderedOverMaxCount();
-  }
-
-  #checkOrderFormat(inputs) {
-    inputs.split(",").forEach((input) => {
-      if (!Constants.REGEX_KOREAN.test(input)) {
-        throw new Error(ErrorMsg.INVALID_ORDER);
-      }
-    });
   }
 
   #checkExistaneAndRedundancy(inputs) {
