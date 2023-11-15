@@ -8,7 +8,6 @@ const InputView = {
   async readOrder() {
     return await Console.readLineAsync(InfoMsg.ASK_ORDER);
   },
-  // ...
 };
 
 export default InputView;
