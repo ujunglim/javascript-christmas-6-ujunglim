@@ -64,6 +64,13 @@ class Order {
     }
   }
 
+  checkAbleToGetEvent() {
+    if (this.getBillBeforeDiscount() < Constants.MIN_BILL_TO_GET_EVENT) {
+      OutputView.display("없음"); // 총주문 금액 만원 미만시 이벤트가 없다
+      return;
+    }
+  }
+
   getOrder() {
     return this.#orderMap;
   }

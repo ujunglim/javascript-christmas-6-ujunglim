@@ -61,11 +61,7 @@ class Controller {
   }
 
   checkEvents(date) {
-    // 총주문 금액 10,000원 미만시
-    if (this.#order.getBillBeforeDiscount() < Constants.MIN_BILL_TO_GET_EVENT) {
-      OutputView.display("없음");
-      return;
-    }
+    this.#order.checkAbleToGetEvent();
     this.checkChristamsEvent(date);
     this.checkWeekdaysDessertEvent(date);
     this.checkWeekendMainEvent(date);
