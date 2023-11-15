@@ -33,10 +33,6 @@ class Order {
     OutputView.displayOrder(this.#orderMap);
   }
 
-  getOrder() {
-    return this.#orderMap;
-  }
-
   getBillBeforeDiscount() {
     let sum = 0;
     this.#orderMap.forEach((detail, name) => {
