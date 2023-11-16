@@ -69,7 +69,7 @@ describe("메뉴입력 예외 테스트", () => {
 
   test("메뉴판에 없는 메뉴 입력시 ", () => {
     expect(() => {
-      InputValidator.order("김치찌개-2");
+      InputValidator.order("김치찌개-3");
     }).toThrow(ErrorMsg.INVALID_ORDER);
   });
 
