@@ -1,7 +1,13 @@
-export default InputView = {
-    async readDate() {
-        const input = await Console.readLineAsync("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
-        // ...
-    }
-    // ...
-}
+import { Console } from "@woowacourse/mission-utils";
+import InfoMsg from "./util/InfoMsg.js";
+
+const InputView = {
+  async readDate() {
+    return await Console.readLineAsync(InfoMsg.ASK_DATE);
+  },
+  async readOrder() {
+    return await Console.readLineAsync(InfoMsg.ASK_ORDER);
+  },
+};
+
+export default InputView;
